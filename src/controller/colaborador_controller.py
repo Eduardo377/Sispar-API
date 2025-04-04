@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 
 from src.model import db
+
 from src.model.colaborador_model import Colaborador
 
 # 

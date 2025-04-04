@@ -1,9 +1,9 @@
-from src.model import db # Instacia do ORM
+from src.model import db # Tráz a instacia do SQLAlchemy para este arquivo.
+# SQLAlchemy é uma biblioteca ORM (Object Relational Mapper) para Python.
 
-from sqlalchemy import Column # Vai transformar atributos em colunas
+from sqlalchemy.schema import Column # Traz o recurso para o ORM entender que o atributo será uma coluna na tabela
 
-from sqlalchemy.types import String, DECIMAL, Integer # VOu setar Tipos de dados para colunas
-
+from sqlalchemy.types import String, DECIMAL, Integer # Importando os tipos de dados que as colunas vão aceitar
 class Colaborador(db.Model): # Mapeia e cria entidade no banco de dados
     
 #----------------------------------------------------------Atributos----------------------------------------------------------------------------
@@ -17,7 +17,7 @@ class Colaborador(db.Model): # Mapeia e cria entidade no banco de dados
     cargo = Column(String(100)) # Cargo do colaborador
     salario = Column(DECIMAL(10, 2)) # Salario do colaborador
 #-----------------------------------------------------------------------------------------------------------------------------------------------    
-    # Construtor da classe Colaborador
+    # Construtor da classe Colaborador                                          
     # Inicializa os atributos com os valores passados como parâmetros
     def __init__(self, nome, email, senha, cargo, salario):
         self.nome = nome
