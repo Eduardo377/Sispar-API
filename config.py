@@ -1,3 +1,4 @@
+# Armazenar as configurações do ambiente de desenvolvimento
 from os import environ # Esse arquivo tem acesso as variaveis de ambiente
 from dotenv import load_dotenv # Carregamento das variaveis de ambiente nesse arquivo do .env
 
