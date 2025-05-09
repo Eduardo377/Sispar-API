@@ -46,3 +46,25 @@ class Reembolso(db.Model):
         self.status = status
         
 #----------------------------------------------------------------------------------------------------------
+
+def to_dict(self) -> dict:
+    return {
+        'id': self.id,
+        'colaborador': self.colaborador,
+        'empresa': self.empresa,
+        'num_prestacao': self.num_prestacao,
+        'descricao': self.descricao,
+        'data': self.data,
+        'tipo_reembolso': self.tipo_reembolso,
+        'centro_custo': self.centro_custo,
+        'ordem_interna': self.ordem_interna,
+        'divisao': self.divisao,
+        'pep': self.pep,
+        'moeda': self.moeda,
+        'distancia_km': self.distancia_km,
+        'valor_km': self.valor_km,
+        'valor_faturado': self.valor_faturado,
+        'despesa': self.despesa,
+        'id_colaborador': self.id_colaborador,
+        'status': self.status
+    }
