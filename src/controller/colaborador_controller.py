@@ -24,7 +24,7 @@ def pegar_dados_todos_colaboradores():
 
 @bp_colaborador.route('/cadastrar', methods=['POST'])
 @swag_from('../docs/colaborador/cadastrar_colaborador.yml')
-def cadastrar_novo_colaborador(): 
+def cadastrar_novo_colaborador():
     
     dados_requisicao = request.get_json() 
     
