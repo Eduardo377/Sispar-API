@@ -60,7 +60,6 @@ def atualizar_dados_do_colaborador(id_colaborador):
 
     return jsonify({'mensagem': 'Dados do colaborador atualizados com sucesso'}), 200
 
-
 @bp_colaborador.route('/login', methods=['POST'])
 def login():
     

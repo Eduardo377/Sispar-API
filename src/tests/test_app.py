@@ -16,7 +16,6 @@ def client(app):
 
 #------------------------------------------------------------------------------------
 
-
 def test_desempenho_requiscao_get(client):
     
     comeco = time.time() # Pegar a hora atual e transformar em segundos 100
