@@ -25,5 +25,5 @@ def test_desempenho_requiscao_get(client):
         resposta = client.get('/colaborador/todos-colaboradores')
     
     fim = time.time() - comeco
-    
+     
     assert fim < 0.2

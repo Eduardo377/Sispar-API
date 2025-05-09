@@ -4,27 +4,26 @@ description: Endpoint para cadastrar um novo colaborador
 
 parameters:
   - in: body
-    name: corpo # <-- Referência ao corpo da requisição
+    name: corpo # Referencia ao body da requisicao
     required: true
-
     schema:
       type: object
       properties:
         nome:
           type: string
-          example: João da Silva
+          example: Joao da silva fredericksen almeida
         email:
           type: string
           example: jojo@email.com
-          senha:
-            type: string
-            example: senha123
-          cargo:
-            type: string
-            example: QA
-          salario:
-            type: number
-            example: 2500.78
+        senha:
+          type: string
+          example: senha123
+        cargo:
+          type: string
+          example: QA
+        salario: 
+          type: number
+          example: 2500.78
       required:
         - nome
         - email
