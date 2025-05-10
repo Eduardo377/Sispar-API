@@ -1,6 +1,5 @@
 {
-    "cSpell.words": [
-        "colaboradores",
-        "dicionário"
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
     ]
 }
