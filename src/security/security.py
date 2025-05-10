@@ -1,4 +1,6 @@
-from flask_bcrypt import bcrypt
+from flask_bcrypt import Bcrypt
+
+bcrypt = Bcrypt()
 
 def hash_senha(senha):
     salt = bcrypt.gensalt() 

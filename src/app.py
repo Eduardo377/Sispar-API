@@ -1,3 +1,8 @@
+# No arquivo app.py, antes de db.create_all(), adicione:
+with app.app_context():
+    db.drop_all()  # Cuidado: isso apagará todos os dados existentes!
+    db.create_all()
+    
 # RESPONSAVEL POR CRIAR A APLICAÇÃO 
 
 from flask import Flask
@@ -29,7 +34,8 @@ def create_app():
     app.config.from_object(Config)
     
     db.init_app(app) # Inicia a conexão com o banco de dados
-    
+    bcrypt.init_app(app)  # Inicializa o Flask-Bcrypt
+        
     Swagger(app, config=swagger_config)
     
     with app.app_context(): # Se as tabelas não existem, crie.
