@@ -1,4 +1,3 @@
-
 from flask import Blueprint, request, jsonify
 from src.model.colaborador_model import Colaborador
 from src.model import db
@@ -9,7 +8,6 @@ from flasgger import swag_from
 # jsonify -> Trabalha com as respostas. Converte um dado em Json
 
 bp_colaborador = Blueprint('colaborador', __name__, url_prefix='/colaborador')
-
 
 @bp_colaborador.route('/todos-colaboradores')
 def pegar_dados_todos_colaboradores():
@@ -25,23 +23,27 @@ def pegar_dados_todos_colaboradores():
 
 @bp_colaborador.route('/cadastrar', methods=['POST'])
 @swag_from('../docs/colaborador/cadastrar_colaborador.yml')
-def cadastrar_novo_colaborador():
+def cadastrar_novo_colaborador(): 
     
-    dados_requisicao = request.get_json() 
+    dados_requisicao = request.get_json()
     
-    novo_colaborador = Colaborador(
-        nome=dados_requisicao['nome'], # Pegue do json o valor relacionado a chave nome
-        email=dados_requisicao['email'],
-        senha= hash_senha(dados_requisicao['senha']) ,
-        cargo=dados_requisicao['cargo'],
-        salario=dados_requisicao['salario']
-    )
+    try:
+        senha_criptografada = hash_senha(dados_requisicao['senha'])
+        novo_colaborador = Colaborador(
+            nome=dados_requisicao['nome'],
+            email=dados_requisicao['email'],
+            senha=senha_criptografada,
+            cargo=dados_requisicao['cargo'],
+            salario=dados_requisicao['salario']
+        )
     
 #   INSERT INTO tb_colaborador (nome, email, senha, cargo, salario) VALUES (VALOR1,VALOR2,VALOR3,VALOR4,VALOR5)
-    db.session.add(novo_colaborador)
-    db.session.commit() # Essa linha executa a query
-    
-    return jsonify( {'mensagem': 'Dado cadastrado com sucesso'}), 201
+        db.session.add(novo_colaborador)
+        db.session.commit() # Essa linha executa a query
+        return jsonify( {'mensagem': 'Dado cadastrado com sucesso'}), 201
+    except Exception as e:
+        print(f"Erro: {e}")  # ou logar com logger
+        return jsonify({'erro': 'Erro ao cadastrar colaborador'}), 400
 
 # Endereco/colaborador/atualizar/1
 @bp_colaborador.route('/atualizar/<int:id_colaborador>', methods=['PUT'])
@@ -95,5 +97,3 @@ def login():
         return jsonify({'mensagem': 'Login realizado com sucesso'}), 200
     else:
         return jsonify({'mensagem': 'Credenciais invalidas'}), 400
-    
-    

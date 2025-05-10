@@ -3,8 +3,7 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt()
 
 def hash_senha(senha):
-    salt = bcrypt.gensalt() 
-    return bcrypt.hashpw(senha.encode('utf-8'), salt)
+    return bcrypt.generate_password_hash(senha).decode('utf-8')
 
 def checar_senha(senha, senha_hash):
-    return bcrypt.checkpw(senha.encode('utf-8'), senha_hash.encode('utf-8'))
+    return bcrypt.check_password_hash(senha_hash, senha)

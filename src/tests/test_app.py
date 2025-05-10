@@ -16,7 +16,6 @@ def client(app):
 
 #------------------------------------------------------------------------------------
 
-
 def test_desempenho_requiscao_get(client):
     
     comeco = time.time() # Pegar a hora atual e transformar em segundos 100
@@ -25,5 +24,15 @@ def test_desempenho_requiscao_get(client):
         resposta = client.get('/colaborador/todos-colaboradores')
     
     fim = time.time() - comeco
-     
+    
     assert fim < 0.2
+    
+#------------------------------------------------------------------------------------
+
+app = create_app()
+with app.app_context():
+    try:
+        db.session.execute('SELECT 1')
+        print("✅ Conexão com MySQL bem-sucedida!")
+    except Exception as e:
+        print(f"❌ Erro de conexão: {str(e)}")
