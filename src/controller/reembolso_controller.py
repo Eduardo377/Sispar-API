@@ -19,7 +19,7 @@ def visualizar_reembolso():
     ).scalar().all()
     
     if not reembolso:
-        return jsonify({'mensagem': 'Reembolso não encontrado'}), 404
+        return jsonify({'mensagem': 'Nenhum reembolso não encontrado'}), 404
     
     return jsonify(reembolso.to_dict()), 200
 
