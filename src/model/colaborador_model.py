@@ -2,7 +2,6 @@ from src.model import db #traz a instancia do SQLALchemy para este arquivo
 from sqlalchemy.schema import Column # Traz o recurso para o ORM entender que o atributo será uma coluna na tabela
 from sqlalchemy.types import String, DECIMAL, Integer # Importando os tipos de dados que as colunas vão aceitar
 
-
 class Colaborador(db.Model):
     
 #------------------------------ATRIBUTOS-----------------------------
@@ -11,7 +10,7 @@ class Colaborador(db.Model):
 #   nome VARCHAR(100)
     nome = Column(String(100))
     email = Column(String(100))
-    senha = Column(String(50))
+    senha = Column(String(255))
     cargo = Column(String(100))
     salario = Column(DECIMAL(10,2))
 #---------------------------------------------------------------------

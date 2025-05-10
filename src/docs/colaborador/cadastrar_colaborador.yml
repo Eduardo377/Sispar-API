@@ -6,7 +6,7 @@ parameters:
   - in: body
     name: corpo # Referencia ao body da requisicao
     required: true
-    schema: 
+    schema:
       type: object
       properties:
         nome:
@@ -34,6 +34,6 @@ responses:
   201:
     description: Colaborador cadastrado com sucesso
   400:
-    description: Erro ao cadastrar colaborador 
+    description: Erro ao cadastrar colaborador
   401:
-    description: Usuario não autorizado 
+    description: Usuario não autorizado

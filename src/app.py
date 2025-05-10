@@ -1,10 +1,12 @@
 # RESPONSAVEL POR CRIAR A APLICAÇÃO 
+
 from flask import Flask
 from src.controller.colaborador_controller import bp_colaborador
 from src.model import db
 from config import Config
 from flask_cors import CORS
 from flasgger import Swagger
+from src.security.security import bcrypt
 
 swagger_config = {
     "headers": [],
@@ -22,17 +24,21 @@ swagger_config = {
 }
 
 def create_app():
-    app = Flask(__name__)
-    CORS(app, origins = ["*"]) # Habilita o CORS para a aplicação
+    app = Flask(__name__) # <-- instancia do Flask
+    app.config['DEBUG'] = True # <-- Habilita o modo debug
+    CORS(app, origins="*") # <---- A politica de CORS seja implementada em TODA A APLICAÇÃO 
     app.register_blueprint(bp_colaborador)
-    
     app.config.from_object(Config)
-    
-    Swagger(app, config=swagger_config)
+    bcrypt.init_app(app)
     
     db.init_app(app) # Inicia a conexão com o banco de dados
     
+    Swagger(app, config=swagger_config)  # Inicializa o Flask-Bcrypt
+        
+    print("Rotas disponíveis:")
+    for rule in app.url_map.iter_rules():
+        print(f"{rule.methods} {rule}")
+    
     with app.app_context(): # Se as tabelas não existem, crie.
         db.create_all()
-    
-    return app    
+    return app

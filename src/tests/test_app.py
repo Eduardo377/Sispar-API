@@ -26,3 +26,13 @@ def test_desempenho_requiscao_get(client):
     fim = time.time() - comeco
     
     assert fim < 0.2
+    
+#------------------------------------------------------------------------------------
+
+app = create_app()
+with app.app_context():
+    try:
+        db.session.execute('SELECT 1')
+        print("✅ Conexão com MySQL bem-sucedida!")
+    except Exception as e:
+        print(f"❌ Erro de conexão: {str(e)}")
