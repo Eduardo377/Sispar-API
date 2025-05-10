@@ -11,7 +11,8 @@ class Reembolso(db.Model):
     empresa = Column(String(50), nullable=False)
     num_prestacao = Column(Integer, nullable=False)
     descricao = Column(String(255))
-    data = Column(DATE, server_default = func.current_date(), nullable=False)
+    # data = Column(DATE, server_default = func.current_date(), nullable=False)
+    data = Column(Date, nullable=False, default=func.current_date())
     tipo_reembolso = Column(String(35), nullable=False)
     centro_custo = Column(String(50), nullable=False)
     ordem_interna = Column(String(50))
@@ -47,24 +48,24 @@ class Reembolso(db.Model):
         
 #----------------------------------------------------------------------------------------------------------
 
-def to_dict(self) -> dict:
-    return {
-        'id': self.id,
-        'colaborador': self.colaborador,
-        'empresa': self.empresa,
-        'num_prestacao': self.num_prestacao,
-        'descricao': self.descricao,
-        'data': self.data,
-        'tipo_reembolso': self.tipo_reembolso,
-        'centro_custo': self.centro_custo,
-        'ordem_interna': self.ordem_interna,
-        'divisao': self.divisao,
-        'pep': self.pep,
-        'moeda': self.moeda,
-        'distancia_km': self.distancia_km,
-        'valor_km': self.valor_km,
-        'valor_faturado': self.valor_faturado,
-        'despesa': self.despesa,
-        'id_colaborador': self.id_colaborador,
-        'status': self.status
-    }
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id,
+            'colaborador': self.colaborador,
+            'empresa': self.empresa,
+            'num_prestacao': self.num_prestacao,
+            'descricao': self.descricao,
+            'data': self.data,
+            'tipo_reembolso': self.tipo_reembolso,
+            'centro_custo': self.centro_custo,
+            'ordem_interna': self.ordem_interna,
+            'divisao': self.divisao,
+            'pep': self.pep,
+            'moeda': self.moeda,
+            'distancia_km': self.distancia_km,
+            'valor_km': self.valor_km,
+            'valor_faturado': self.valor_faturado,
+            'despesa': self.despesa,
+            'id_colaborador': self.id_colaborador,
+            'status': self.status
+        }

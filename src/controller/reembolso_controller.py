@@ -7,21 +7,23 @@
 from flask import Blueprint, request, jsonify
 from src.model.reembolso_model import Reembolso
 from src.model import db
+from sqlalchemy.sql import func
 from flasgger import swag_from
+from datetime import datetime
 
 bp_reembolsos = Blueprint('reembolso', __name__, url_prefix='/reembolso')
 
-@bp_reembolsos.route('/solitacoes')
+@bp_reembolsos.route('/solicitacoes')
 @swag_from('../docs/reembolso/listar_reembolsos.yml')
 def visualizar_reembolso():
-    reembolso = db.session.execute(
+    reembolso = db.session.scalars(
         db.select(Reembolso)
-    ).scalar().all()
+    ).all()
     
     if not reembolso:
-        return jsonify({'mensagem': 'Nenhum reembolso não encontrado'}), 404
+        return jsonify({'mensagem': 'Nenhum reembolso encontrado'}), 404
     
-    return jsonify(reembolso.to_dict()), 200
+    return jsonify([r.to_dict() for r in reembolso]), 200
 
 @bp_reembolsos.route('/solicitacoes', methods=['POST'])
 @swag_from('../docs/reembolso/solicitar_reembolso.yml')
@@ -33,9 +35,9 @@ def solicitar_reembolso():
         empresa=dados['empresa'],
         num_prestacao=dados['num_prestacao'],
         descricao=dados.get('descricao', ''),
-        data=dados.get('data'),
+        data=dados.get('data') or datetime.now().date(),
         tipo_reembolso=dados['tipo_reembolso'],
-        centro_custo=dados['centro_custo'],
+        centro_custo=dados['c'],
         ordem_interna=dados.get('ordem_interna'),
         divisao=dados.get('divisao'),
         pep=dados.get('pep'),

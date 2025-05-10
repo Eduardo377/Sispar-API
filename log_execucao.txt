@@ -1,0 +1,21 @@
+Rotas disponíveis:
+{'GET', 'HEAD', 'OPTIONS'} /static/<path:filename>
+{'GET', 'HEAD', 'OPTIONS'} /colaborador/todos-colaboradores
+{'POST', 'OPTIONS'} /colaborador/cadastrar
+{'OPTIONS', 'PUT'} /colaborador/atualizar/<int:id_colaborador>
+{'POST', 'OPTIONS'} /colaborador/login
+{'GET', 'HEAD', 'OPTIONS'} /reembolso/solicitacoes
+{'POST', 'OPTIONS'} /reembolso/solicitacoes
+{'GET', 'HEAD', 'OPTIONS'} /flasgger_static/<path:filename>
+{'GET', 'HEAD', 'OPTIONS'} /apidocs/
+{'GET', 'HEAD', 'OPTIONS'} /oauth2-redirect.html
+{'GET', 'HEAD', 'OPTIONS'} /apidocs/index.html
+{'GET', 'HEAD', 'OPTIONS'} /apispec.json/
+ * Serving Flask app 'src.app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 103-034-699

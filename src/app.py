@@ -2,6 +2,7 @@
 
 from flask import Flask
 from src.controller.colaborador_controller import bp_colaborador
+from src.controller.reembolso_controller import bp_reembolsos
 from src.model import db
 from config import Config
 from flask_cors import CORS
@@ -27,7 +28,8 @@ def create_app():
     app = Flask(__name__) # <-- instancia do Flask
     app.config['DEBUG'] = True # <-- Habilita o modo debug
     CORS(app, origins="*") # <---- A politica de CORS seja implementada em TODA A APLICAÇÃO 
-    app.register_blueprint(bp_colaborador)
+    app.register_blueprint(bp_colaborador) # Registra o blueprint -> colaborador
+    app.register_blueprint(bp_reembolsos) # Registra o blueprint -> reembolso
     app.config.from_object(Config)
     bcrypt.init_app(app)
     
