@@ -35,4 +35,4 @@ def create_app():
     with app.app_context(): # Se as tabelas não existem, crie.
         db.create_all()
     
-    return app    
+    return app
