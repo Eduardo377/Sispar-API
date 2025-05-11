@@ -3,6 +3,7 @@ from sqlalchemy.schema import Column # Traz o recurso para o ORM entender que o 
 from sqlalchemy.types import String, DECIMAL, Integer # Importando os tipos de dados que as colunas vão aceitar
 
 class Colaborador(db.Model):
+    __tablename__ = "colaborador"
     
 #------------------------------ATRIBUTOS-----------------------------
 #   id INT AUTO_INCREMENT PRIMARY KEY
