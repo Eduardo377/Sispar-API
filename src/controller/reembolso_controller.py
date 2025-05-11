@@ -30,26 +30,30 @@ def visualizar_reembolso():
 def solicitar_reembolso():
     dados = request.get_json()
     
-    novo_reembolso = Reembolso(
-        colaborador=dados['colaborador'],
-        empresa=dados['empresa'],
-        num_prestacao=dados['num_prestacao'],
-        descricao=dados.get('descricao', ''),
-        data=dados.get('data') or datetime.now().date(),
-        tipo_reembolso=dados['tipo_reembolso'],
-        centro_custo=dados['c'],
-        ordem_interna=dados.get('ordem_interna'),
-        divisao=dados.get('divisao'),
-        pep=dados.get('pep'),
-        moeda=dados['moeda'],
-        distancia_km=dados.get('distancia_km'),
-        valor_km=dados.get('valor_km'),
-        valor_faturado=dados['valor_faturado'],
-        despesa=dados.get('despesa', 0),
-        id_colaborador=dados['id_colaborador']
-    )
+    try:
+        novo_reembolso = Reembolso(
+            colaborador=dados['colaborador'],
+            empresa=dados['empresa'],
+            num_prestacao=dados['num_prestacao'],
+            descricao=dados.get('descricao', ''),
+            data=dados.get('data') or datetime.now().date(),
+            tipo_reembolso=dados['tipo_reembolso'],
+            centro_custo=dados['centro_custo'],
+            ordem_interna=dados.get('ordem_interna'),
+            divisao=dados.get('divisao'),
+            pep=dados.get('pep'),
+            moeda=dados['moeda'],
+            distancia_km=dados.get('distancia_km'),
+            valor_km=dados.get('valor_km'),
+            valor_faturado=dados['valor_faturado'],
+            despesa=dados.get('despesa', 0),
+            id_colaborador=dados['id_colaborador']
+        )
+        
+        db.session.add(novo_reembolso)
+        db.session.commit()
+        return jsonify({'mensagem': 'Reembolso solicitado com sucesso'}), 201
+    except Exception as e:
+        print(f"Erro: {e}")
+        return jsonify({'erro': 'Erro ao solicitar reembolso'}), 400
     
-    db.session.add(novo_reembolso)
-    db.session.commit()
-    
-    return jsonify({'mensagem': 'Reembolso solicitado com sucesso'}), 201

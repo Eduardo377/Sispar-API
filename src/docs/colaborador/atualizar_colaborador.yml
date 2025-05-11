@@ -1,10 +1,17 @@
 tags:
   - name: Colaborador
-description: Endpoint para cadastrar um novo colaborador
+description: Endpoint para atualizar os dados de um colaborador existente
 
 parameters:
+  - in: path
+    name: id_colaborador
+    required: true
+    description: ID do colaborador a ser atualizado
+    schema:
+      type: integer
+
   - in: body
-    name: corpo # Referencia ao body da requisicao
+    name: corpo
     required: true
     schema:
       type: object
@@ -24,18 +31,13 @@ parameters:
         salario: 
           type: number
           example: 2500.78
-      required:
-        - nome
-        - email
-        - senha
-        - cargo
-        - salario
+
 responses:
-  201:
-    description: Colaborador cadastrado com sucesso
+  200:
+    description: Colaborador atualizado com sucesso
   400:
-    description: Erro ao cadastrar colaborador
-  401:
-    description: Usuario não autorizado
+    description: Erro na requisição
+  404:
+    description: Colaborador não encontrado
   500:
     description: Erro inesperado no servidor

@@ -1,5 +1,5 @@
 tags:
-  - Reembolso
+  - name: Reembolso
 description: Cadastrar nova solicitação de reembolso
 
 parameters:
@@ -7,8 +7,6 @@ parameters:
     name: corpo
     required: true
     schema:
-      type: array
-      items:
         type: object
         properties:
           colaborador:
