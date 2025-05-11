@@ -13,7 +13,7 @@ swagger_config = {
     "headers": [],
     "specs": [
         {
-"endpoint": "apispec", # <-- Da um nome de referencia para a documentacao
+            "endpoint": "apispec", # <-- Da um nome de referencia para a documentacao
             "route": "/apispec.json/", # <- Rota do arquivo JSON para a construção da documentação
             "rule_filter": lambda rule: True, # <-- Todas as rotas/endpoints serão documentados
             "model_filter": lambda tag: True, # <-- Especificar quuais modelos da entidade serão documentados
@@ -35,7 +35,7 @@ def create_app():
     
     db.init_app(app) # Inicia a conexão com o banco de dados
     
-    Swagger(app, config=swagger_config)  # Inicializa o Flask-Bcrypt
+    Swagger(app, config=swagger_config)  # Inicializa o Swagger com a configuração definida
         
     print("Rotas disponíveis:")
     for rule in app.url_map.iter_rules():

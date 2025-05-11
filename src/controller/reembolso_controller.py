@@ -13,7 +13,7 @@ from datetime import datetime
 
 bp_reembolsos = Blueprint('reembolso', __name__, url_prefix='/reembolso')
 
-@bp_reembolsos.route('/solicitacoes')
+@bp_reembolsos.route('/listar_reembolsos', methods=['GET'])
 @swag_from('../docs/reembolso/listar_reembolsos.yml')
 def visualizar_reembolso():
     reembolso = db.session.scalars(
@@ -25,7 +25,7 @@ def visualizar_reembolso():
     
     return jsonify([r.to_dict() for r in reembolso]), 200
 
-@bp_reembolsos.route('/solicitacoes', methods=['POST'])
+@bp_reembolsos.route('/solicitar_reembolso', methods=['POST'])
 @swag_from('../docs/reembolso/solicitar_reembolso.yml')
 def solicitar_reembolso():
     dados = request.get_json()
