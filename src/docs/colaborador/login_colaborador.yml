@@ -1,0 +1,27 @@
+tags:
+  - name: Colaborador
+description: Endpoint para atualizar os dados de um colaborador existente
+
+parameters:
+  - in: body
+    name: corpo
+    required: true
+    schema:
+      type: object
+      properties:
+        email:
+          type: string
+          example: jojo@email.com
+        senha:
+          type: string
+          example: senha123
+
+responses:
+  200:
+    description: Colaborador atualizado com sucesso
+  400:
+    description: Erro na requisição
+  404:
+    description: Colaborador não encontrado
+  500:
+    description: Erro inesperado no servidor
