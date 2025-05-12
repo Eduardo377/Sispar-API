@@ -105,6 +105,7 @@ def atualizar_dados_do_reembolso(id_reembolso):
         return jsonify({'erro': 'Erro ao atualizar reembolso.'}), 400
     
 @bp_reembolsos.route('/deletar/<int:id_reembolso>', methods=['DELETE'])
+@swag_from('../docs/reembolso/deletar_reembolso.yml')
 def deletar_reembolso(id_reembolso):
     reembolso = db.session.query(Reembolso).get(id_reembolso) # Buscando o colaborador pelo id
     
