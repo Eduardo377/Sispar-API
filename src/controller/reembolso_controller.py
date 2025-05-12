@@ -12,7 +12,6 @@ from flasgger import swag_from
 from datetime import datetime
 
 bp_reembolsos = Blueprint('reembolso', __name__, url_prefix='/reembolso')
-
 @bp_reembolsos.route('/solicitar_reembolso', methods=['POST'])
 @swag_from('../docs/reembolso/solicitar_reembolso.yml')
 def solicitar_reembolso():
@@ -56,3 +55,51 @@ def visualizar_reembolso():
         return jsonify({'mensagem': 'Nenhum reembolso encontrado'}), 404
     
     return jsonify([r.to_dict() for r in reembolso]), 200
+
+# Endereco/colaborador/atualizar/1
+@bp_reembolsos.route('/atualizar/<int:id_reembolso>', methods=['PUT'])
+@swag_from('../docs/reembolso/atualizar_reembolso.yml')
+def atualizar_dados_do_reembolso(id_reembolso):
+    dados_reembolso = request.get_json()
+
+    try:
+        reembolso = db.session.query(Reembolso).get(id_reembolso) # Buscando o colaborador pelo id
+
+        if not reembolso:
+            return jsonify({'erro': 'Reembolso não encontrado'}), 404
+        if 'colaborador' in dados_reembolso:
+            reembolso.colaborador = dados_reembolso['colaborador']
+        if 'empresa' in dados_reembolso:
+            reembolso.empresa = dados_reembolso['empresa']
+        if 'descricao' in dados_reembolso:
+            reembolso.descricao = dados_reembolso['descricao']
+        if 'data' in dados_reembolso:
+            reembolso.data = dados_reembolso['data']
+        if 'tipo_reembolso' in dados_reembolso:
+            reembolso.tipo_reembolso = dados_reembolso['tipo_reembolso']
+        if 'centro_custo' in dados_reembolso:
+            reembolso.centro_custo = dados_reembolso['centro_custo']
+        if 'ordem_interna' in dados_reembolso:
+            reembolso.ordem_interna = dados_reembolso['ordem_interna']
+        if 'divisao' in dados_reembolso:
+            reembolso.divisao = dados_reembolso['divisao']
+        if 'pep' in dados_reembolso:
+            reembolso.pep = dados_reembolso['pep']
+        if 'moeda' in dados_reembolso:
+            reembolso.moeda = dados_reembolso['moeda']
+        if 'distancia_km' in dados_reembolso:
+            reembolso.distancia_km = dados_reembolso['distancia_km']
+        if 'valor_km' in dados_reembolso:
+            reembolso.valor_km = dados_reembolso['valor_km']
+        if 'valor_faturado' in dados_reembolso:
+            reembolso.valor_faturado = dados_reembolso['valor_faturado']
+        if 'despesa' in dados_reembolso:
+            reembolso.despesa = dados_reembolso['despesa']
+        if 'status' in dados_reembolso:
+            reembolso.status = dados_reembolso['status'] 
+                
+        db.session.commit()
+        return jsonify({'mensagem': 'Dados do reembolso atualizados com sucesso'}), 200
+    except Exception as e:
+        print(f"Erro: {e}")
+        return jsonify({'erro': 'Erro ao atualizar reembolso.'}), 400

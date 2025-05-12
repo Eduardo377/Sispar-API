@@ -1,5 +1,6 @@
 tags:
-  - name: Colaborador
+  - Colaborador
+summary: Cadastrar um novo colaborador
 description: Endpoint para cadastrar um novo colaborador
 
 parameters:
