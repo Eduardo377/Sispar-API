@@ -103,3 +103,19 @@ def atualizar_dados_do_reembolso(id_reembolso):
     except Exception as e:
         print(f"Erro: {e}")
         return jsonify({'erro': 'Erro ao atualizar reembolso.'}), 400
+    
+@bp_reembolsos.route('/deletar/<int:id_reembolso>', methods=['DELETE'])
+def deletar_reembolso(id_reembolso):
+    reembolso = db.session.query(Reembolso).get(id_reembolso) # Buscando o colaborador pelo id
+    
+    try:
+        if not reembolso:
+            return jsonify({'erro': 'Reembolso não encontrado'}), 404
+    
+        db.session.delete(reembolso)
+        db.session.commit()
+        return jsonify({'mensagem': 'Reembolso deletado com sucesso'}), 200
+    
+    except Exception as e:
+        print(f"Erro: {e}")
+        return jsonify({'erro': 'Erro ao deletar reembolso'}), 400
