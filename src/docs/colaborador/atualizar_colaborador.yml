@@ -1,12 +1,13 @@
 tags:
-  - name: Colaborador
+  - Colaborador
+summary: Atualizar colaborador
 description: Endpoint para atualizar os dados de um colaborador existente
 
 parameters:
   - in: path
     name: id_colaborador
     required: true
-    description: ID do colaborador a ser atualizado
+    description: Coloque o ID do colaborador a ser atualizado
     schema:
       type: integer
 

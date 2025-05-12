@@ -1,5 +1,6 @@
 tags:
-  - name: Colaborador
+  - Colaborador
+summary: Deletar um colaborador
 description: Endpoint para atualizar os dados de um colaborador existente
 
 parameters:

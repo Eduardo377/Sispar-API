@@ -1,5 +1,6 @@
 tags:
-  - name: Reembolso
+  - Reembolso
+summary: Pegar todos os reembolsos
 description: Retorna a lista de todos os reembolsos solicitados
 responses:
   200:

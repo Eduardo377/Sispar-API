@@ -1,0 +1,85 @@
+tags:
+  - Reembolso
+summary: Atualizar um reembolso
+description: Endpoint para atualizar uma solicitação de reembolso existente
+
+parameters:
+  - name: id_reembolso
+    in: path
+    required: true
+    description: Coloque o ID do reembolso a ser atualizado
+    schema:
+      type: integer
+
+  - name: corpo
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        colaborador:
+          type: string
+          example: Marcos Monte
+        empresa:
+          type: string
+          example: Company
+        num_prestacao:
+          type: integer
+          example: 1
+        descricao:
+          type: string
+          example: Comprovante de pizzaria
+        data:
+          type: string
+          format: date
+          example: 1990/05/05
+        tipo_reembolso:
+          type: string
+          example: gasolina
+        centro_custo:
+          type: string
+          example: 1100109002 - FIN CONTROLES INTERNOS MTZ
+        ordem_interna:
+          type: string
+          example: "111"
+          description: Substituído se 'pep' for informado
+        divisao:
+          type: string
+          example: "111"
+          description: Substituído se 'pep' for informado
+        pep:
+          type: string
+          example: "123-456"
+          description: Código PEP completo (opcional se ordem_interna e divisão forem informados)
+        moeda:
+          type: string
+          example: BRL
+        distancia_km:
+          type: string
+          example: "100.10"
+        valor_km:
+          type: string
+          example: "2"
+        valor_faturado:
+          type: number
+          example: 200.20
+        despesa:
+          type: number
+          example: 150.50
+          description: Valor pago em adiantamento (opcional)
+        id_colaborador:
+          type: integer
+          example: 1
+        status:
+          type: string
+          example: analisando
+
+responses:
+  200:
+    description: Reembolso atualizado com sucesso
+  400:
+    description: Erro na requisição
+  404:
+    description: Reembolso não encontrado
+  500:
+    description: Erro inesperado no servidor
