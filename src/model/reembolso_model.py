@@ -5,6 +5,7 @@ from sqlalchemy.types import Integer, String, DECIMAL, Date
 from sqlalchemy.sql import func # <- Importa uma função geradora para pegar data e hora atual
 
 class Reembolso(db.Model):
+    __tablename__ = "reembolso"
 # --------------------------------------ATRIBUTOS--------------------------------------
     id = Column(Integer, primary_key=True, autoincrement=True)
     colaborador = Column(String(150), nullable=False)

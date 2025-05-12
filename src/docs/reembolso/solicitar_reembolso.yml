@@ -1,5 +1,6 @@
 tags:
-  - name: Reembolso
+  - Reembolso
+summary: Solicitar reembolso
 description: Cadastrar nova solicitação de reembolso
 
 parameters:
