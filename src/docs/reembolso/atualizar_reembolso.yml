@@ -17,53 +17,53 @@ parameters:
     schema:
       type: object
       properties:
-        colaborador:
+        name:
           type: string
           example: Marcos Monte
-        empresa:
+        company:
           type: string
           example: Company
-        num_prestacao:
+        installment_number:
           type: integer
           example: 1
-        descricao:
+        description:
           type: string
           example: Comprovante de pizzaria
-        data:
+        date:
           type: string
           format: date
           example: 1990/05/05
-        tipo_reembolso:
+        expense_type:
           type: string
           example: gasolina
-        centro_custo:
+        cost_center:
           type: string
           example: 1100109002 - FIN CONTROLES INTERNOS MTZ
-        ordem_interna:
+        internal_order:
           type: string
           example: "111"
           description: Substituído se 'pep' for informado
-        divisao:
+        div:
           type: string
           example: "111"
           description: Substituído se 'pep' for informado
         pep:
           type: string
           example: "123-456"
-          description: Código PEP completo (opcional se ordem_interna e divisão forem informados)
-        moeda:
+          description: Código PEP completo (opcional se internal_order e div forem informados)
+        currency:
           type: string
           example: BRL
-        distancia_km:
+        distance_km:
           type: string
           example: "100.10"
-        valor_km:
+        value_km:
           type: string
           example: "2"
-        valor_faturado:
+        value_billed:
           type: number
           example: 200.20
-        despesa:
+        expense:
           type: number
           example: 150.50
           description: Valor pago em adiantamento (opcional)

@@ -27,7 +27,7 @@ swagger_config = {
 def create_app():
     app = Flask(__name__) # <-- instancia do Flask
     app.config['DEBUG'] = True # <-- Habilita o modo debug
-    CORS(app, origins="*") # <---- A politica de CORS seja implementada em TODA A APLICAÇÃO 
+    CORS(app, origins=["https://sispar-six.vercel.app", "https://sispar.netlify.app/", "http://localhost:5173"]) # <---- A politica de CORS seja implementada em TODA A APLICAÇÃO 
     app.register_blueprint(bp_colaborador) # Registra o blueprint -> colaborador
     app.register_blueprint(bp_reembolsos) # Registra o blueprint -> reembolso
     app.config.from_object(Config)
@@ -36,10 +36,6 @@ def create_app():
     db.init_app(app) # Inicia a conexão com o banco de dados
     
     Swagger(app, config=swagger_config)  # Inicializa o Swagger com a configuração definida
-        
-    print("Rotas disponíveis:")
-    for rule in app.url_map.iter_rules():
-        print(f"{rule.methods} {rule}")
     
     with app.app_context(): # Se as tabelas não existem, crie.
         db.create_all()

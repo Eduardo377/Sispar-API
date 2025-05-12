@@ -1,49 +1,48 @@
 from src.model import db
 from sqlalchemy.schema import Column, ForeignKey # Traz o recurso para o ORM entender que o atributo será uma coluna na tabela
 # Traz o recurso para o ORM entender que o atributo será uma chave estrangeira na tabela
-from sqlalchemy.types import Integer, String, DECIMAL, Date
-from sqlalchemy.sql import func # <- Importa uma função geradora para pegar data e hora atual
+from sqlalchemy.types import Integer, String, DECIMAL, DATE
+from sqlalchemy.sql import func # <- Importa uma função geradora para pegar date e hora atual
 
 class Reembolso(db.Model):
     __tablename__ = "reembolso"
 # --------------------------------------ATRIBUTOS--------------------------------------
     id = Column(Integer, primary_key=True, autoincrement=True)
-    colaborador = Column(String(150), nullable=False)
-    empresa = Column(String(50), nullable=False)
-    num_prestacao = Column(Integer, nullable=False)
-    descricao = Column(String(255))
-    # data = Column(DATE, server_default = func.current_date(), nullable=False)
-    data = Column(Date, nullable=False, default=func.current_date())
-    tipo_reembolso = Column(String(35), nullable=False)
-    centro_custo = Column(String(50), nullable=False)
-    ordem_interna = Column(String(50))
-    divisao = Column(String(50))
+    name = Column(String(150), nullable=False)
+    company = Column(String(50), nullable=False)
+    installment_number = Column(Integer, nullable=False)
+    description = Column(String(255))
+    date = Column(DATE, nullable=False, default=func.current_date())
+    expense_type = Column(String(35), nullable=False)
+    cost_center = Column(String(50), nullable=False)
+    internal_order = Column(String(50))
+    div = Column(String(50))
     pep = Column(String(50))
-    moeda = Column(String(20), nullable=False)
-    distancia_km = Column(String(50)) 
-    valor_km = Column(String(50)) 
-    valor_faturado = Column(DECIMAL(10,2), nullable=False) 
-    despesa = Column(DECIMAL(10,2))
+    currency = Column(String(20), nullable=False)
+    distance_km = Column(String(50)) 
+    value_km = Column(String(50)) 
+    value_billed = Column(DECIMAL(10,2), nullable=False) 
+    expense = Column(DECIMAL(10,2))
     id_colaborador = Column(Integer, ForeignKey(column='colaborador.id'), nullable=False)
     status = Column(String(25))
 #-------------------------------------------------------------------------------------------------------------
 
-    def __init__(self, colaborador, empresa, num_prestacao,descricao, data, tipo_reembolso, centro_custo, ordem_interna, divisao, pep, moeda, distancia_km, valor_km, valor_faturado, despesa, id_colaborador, status='Em analise'):
-        self.colaborador = colaborador
-        self.empresa = empresa
-        self.num_prestacao = num_prestacao
-        self.descricao = descricao
-        self.data=data
-        self.tipo_reembolso = tipo_reembolso
-        self.centro_custo = centro_custo
-        self.ordem_interna = ordem_interna
-        self.divisao = divisao
+    def __init__(self, name, company, installment_number,description, date, expense_type, cost_center, internal_order, div, pep, currency, distance_km, value_km, value_billed, expense, id_colaborador, status='Em analise'):
+        self.name = name
+        self.company = company
+        self.installment_number = installment_number
+        self.description = description
+        self.date=date
+        self.expense_type = expense_type
+        self.cost_center = cost_center
+        self.internal_order = internal_order
+        self.div = div
         self.pep = pep
-        self.moeda = moeda
-        self.distancia_km = distancia_km
-        self.valor_km = valor_km
-        self.valor_faturado = valor_faturado
-        self.despesa = despesa
+        self.currency = currency
+        self.distance_km = distance_km
+        self.value_km = value_km
+        self.value_billed = value_billed
+        self.expense = expense
         self.id_colaborador = id_colaborador
         self.status = status
         
@@ -52,21 +51,21 @@ class Reembolso(db.Model):
     def to_dict(self) -> dict:
         return {
             'id': self.id,
-            'colaborador': self.colaborador,
-            'empresa': self.empresa,
-            'num_prestacao': self.num_prestacao,
-            'descricao': self.descricao,
-            'data': self.data,
-            'tipo_reembolso': self.tipo_reembolso,
-            'centro_custo': self.centro_custo,
-            'ordem_interna': self.ordem_interna,
-            'divisao': self.divisao,
+            'name': self.name,
+            'company': self.company,
+            'installment_number': self.installment_number,
+            'description': self.description,
+            'date': self.date,
+            'expense_type': self.expense_type,
+            'cost_center': self.cost_center,
+            'internal_order': self.internal_order,
+            'div': self.div,
             'pep': self.pep,
-            'moeda': self.moeda,
-            'distancia_km': self.distancia_km,
-            'valor_km': self.valor_km,
-            'valor_faturado': self.valor_faturado,
-            'despesa': self.despesa,
+            'currency': self.currency,
+            'distance_km': self.distance_km,
+            'value_km': self.value_km,
+            'value_billed': self.value_billed,
+            'expense': self.expense,
             'id_colaborador': self.id_colaborador,
             'status': self.status
         }

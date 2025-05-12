@@ -1,7 +1,7 @@
 tags:
   - Colaborador
 summary: Deletar um colaborador
-description: Endpoint para deleyat os dados de um colaborador existente
+description: Endpoint para deleta os dados de um colaborador existente
 
 parameters:
   - in: path

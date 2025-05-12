@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from src.model.colaborador_model import Colaborador
 from src.model import db
-from src.security.security import hash_senha, checar_senha
+from src.security.security import hash_password, checar_password
 from flasgger import swag_from
 from sqlalchemy.exc import IntegrityError
 
@@ -17,9 +17,9 @@ def login():
     dados_requisicao = request.get_json()
     
     email = dados_requisicao.get('email')
-    senha = dados_requisicao.get('senha')
+    password = dados_requisicao.get('password')
     
-    if not email or not senha:
+    if not email or not password:
         return jsonify({'mensagem': 'Todos os dados precisam ser preenchidos'}), 400
     
     # SELECT * FROM [TABELA]
@@ -40,7 +40,7 @@ def login():
     print(f'dado: {colaborador} é do tipo {type(colaborador)}')
     print('*'*100)
     
-    if email == colaborador.get('email') and checar_senha(senha, colaborador.get('senha')):
+    if email == colaborador.get('email') and checar_password(password, colaborador.get('password')):
         return jsonify({'mensagem': 'Login realizado com sucesso'}), 200
     else:
         return jsonify({'mensagem': 'Credenciais invalidas'}), 400
@@ -53,16 +53,16 @@ def cadastrar_novo_colaborador():
     dados_requisicao = request.get_json()
     
     try:
-        senha_criptografada = hash_senha(dados_requisicao['senha'])
+        password_criptografada = hash_password(dados_requisicao['password'])
         novo_colaborador = Colaborador(
-            nome=dados_requisicao['nome'],
+            name=dados_requisicao['name'],
             email=dados_requisicao['email'],
-            senha=senha_criptografada,
-            cargo=dados_requisicao['cargo'],
-            salario=dados_requisicao['salario']
+            password=password_criptografada,
+            position=dados_requisicao['position'],
+            wage=dados_requisicao['wage']
         )
     
-#   INSERT INTO tb_colaborador (nome, email, senha, cargo, salario) VALUES (VALOR1,VALOR2,VALOR3,VALOR4,VALOR5)
+#   INSERT INTO tb_colaborador (name, email, password, position, wage) VALUES (VALOR1,VALOR2,VALOR3,VALOR4,VALOR5)
         db.session.add(novo_colaborador)
         db.session.commit() # Essa linha executa a query
         return jsonify( {'mensagem': 'Dado cadastrado com sucesso'}), 201
@@ -97,17 +97,17 @@ def atualizar_dados_do_colaborador(id_colaborador):
         if not colaborador:
             return jsonify({'erro': 'Colaborador não encontrado'}), 404
         
-        if 'nome' in dados_requisicao:
-            colaborador.nome = dados_requisicao['nome']
+        if 'name' in dados_requisicao:
+            colaborador.name = dados_requisicao['name']
         if 'email' in dados_requisicao:
             colaborador.email = dados_requisicao['email']
-        if 'senha' in dados_requisicao:
-            senha_criptografada = hash_senha(dados_requisicao['senha'])
-            colaborador.senha = senha_criptografada
-        if 'cargo' in dados_requisicao:
-            colaborador.cargo = dados_requisicao['cargo']
-        if 'salario' in dados_requisicao:
-            colaborador.salario = dados_requisicao['salario']
+        if 'password' in dados_requisicao:
+            password_criptografada = hash_password(dados_requisicao['password'])
+            colaborador.password = password_criptografada
+        if 'position' in dados_requisicao:
+            colaborador.position = dados_requisicao['position']
+        if 'wage' in dados_requisicao:
+            colaborador.wage = dados_requisicao['wage']
             
         db.session.add(colaborador)
         db.session.commit()
