@@ -122,9 +122,8 @@ def atualizar_dados_do_colaborador(id_colaborador):
 @swag_from('../docs/colaborador/deletar_colaborador.yml')
 def deletar_colaborador(id_colaborador):
     
+    colaborador = db.session.query(Colaborador).get(id_colaborador)
     try:
-        colaborador = db.session.query(Colaborador).get(id_colaborador)
-
         if not colaborador:
             return jsonify({'erro': 'Colaborador não encontrado'}), 404
             
