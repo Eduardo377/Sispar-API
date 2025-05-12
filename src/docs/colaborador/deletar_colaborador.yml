@@ -1,7 +1,7 @@
 tags:
   - Colaborador
 summary: Deletar um colaborador
-description: Endpoint para atualizar os dados de um colaborador existente
+description: Endpoint para deleyat os dados de um colaborador existente
 
 parameters:
   - in: path
@@ -13,7 +13,7 @@ parameters:
 
 responses:
   200:
-    description: Colaborador atualizado com sucesso
+    description: Colaborador deletado com sucesso
   400:
     description: Erro na requisição
   404:

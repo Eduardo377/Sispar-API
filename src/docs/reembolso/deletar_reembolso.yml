@@ -1,0 +1,22 @@
+tags:
+  - Reembolso
+summary: Deletar um reembolso
+description: Endpoint para deletar os dados de um reembolso existente
+
+parameters:
+  - in: path
+    name: id_reembolso
+    required: true
+    description: ID do reembolso a ser atualizado
+    schema:
+      type: integer
+
+responses:
+  200:
+    description: Reembolso deletado com sucesso
+  400:
+    description: Erro na requisição
+  404:
+    description: Reembolso não encontrado
+  500:
+    description: Erro inesperado no servidor
