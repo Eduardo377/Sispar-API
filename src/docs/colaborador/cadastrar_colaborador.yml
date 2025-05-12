@@ -10,27 +10,27 @@ parameters:
     schema:
       type: object
       properties:
-        nome:
+        name:
           type: string
-          example: Joao da silva fredericksen almeida
+          example: Fernanda da silva fredericksen almeida
         email:
           type: string
-          example: jojo@email.com
-        senha:
+          example: zeze@email.com
+        passoword:
           type: string
-          example: senha123
-        cargo:
+          example: password123
+        position:
           type: string
-          example: QA
-        salario: 
+          example: Fuul-stack
+        wage: 
           type: number
           example: 2500.78
       required:
-        - nome
+        - name
         - email
-        - senha
-        - cargo
-        - salario
+        - password
+        - position
+        - wage
 responses:
   201:
     description: Colaborador cadastrado com sucesso

@@ -8,32 +8,32 @@ class Colaborador(db.Model):
 #------------------------------ATRIBUTOS-----------------------------
 #   id INT AUTO_INCREMENT PRIMARY KEY
     id = Column(Integer, primary_key=True, autoincrement=True)
-#   nome VARCHAR(100)
-    nome = Column(String(100))
+#   name VARCHAR(100)
+    name = Column(String(100))
     email = Column(String(100))
-    senha = Column(String(255))
-    cargo = Column(String(100))
-    salario = Column(DECIMAL(10,2))
+    password = Column(String(255))
+    position = Column(String(100))
+    wage = Column(DECIMAL(10,2))
 #---------------------------------------------------------------------
-    def __init__(self, nome, email, senha, cargo, salario):
-        self.nome = nome
+    def __init__(self, name, email, password, position, wage):
+        self.name = name
         self.email = email
-        self.senha = senha
-        self.cargo = cargo
-        self.salario = salario
+        self.password = password
+        self.position = position
+        self.wage = wage
 # ----------------------------------------------------------------------
 
     def to_dict(self) -> dict:
         return {
             'email': self.email,
-            'senha': self.senha
+            'password': self.password
         }
         
-    def all_data(self) -> dict:
+    def all_date(self) -> dict:
         return {
             'id': self.id,
-            'nome': self.nome,
-            'cargo': self.cargo,
-            'salario': self.salario,
-            'email': self.email
+            'name': self.name,
+            'email': self.email,
+            'position': self.position,
+            'wage': self.wage
         }

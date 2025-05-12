@@ -10,52 +10,52 @@ parameters:
     schema:
         type: object
         properties:
-          colaborador:
+          name:
             type: string
             example: marcos monte
-          empresa:
+          company:
             type: string
             example: vai na web company
-          num_prestacao:
+          installment_number:
             type: number
             example: 1
-          descricao:
+          description:
             type: string
             example: Comprovante de abastecimento em posto de gasolina
-          data:
+          date:
             type: date
             example: 2025/05/05
-          tipo_reembolso:
+          expense_type:
             type: string
             example: gasolina
-          centro_custo:
+          cost_center:
             type: string
             example: 1100109002 - FIN CONTROLES INTERNOS MTZ
-          ordem_interna: 
+          internal_order: 
             type: string
             example: "123"
             description: Código de ordem interna será substituído se 'pep' for informado
-          divisao:
+          div:
             type: string
             example: "456"
-            description: Código de divisao será substituído se 'pep' for informado
+            description: Código de div será substituído se 'pep' for informado
           pep:
             type: string
             example: "123-456"
-            description: Código PEP completo (opcional se 'ordem_interna' e 'divisao' forem informados)
-          moeda:
+            description: Código PEP completo (opcional se 'internal_order' e 'div' forem informados)
+          currency:
             type: string
             example: BRL
-          distancia_km:
+          distance_km:
             type: string
             example: "100.10"
-          valor_km:
+          value_km:
             type: string
             example: "2"
-          valor_faturado:
+          value_billed:
             type: number
             example: 200.20
-          despesa:
+          expense:
             type: number
             example: 150.50
             description: Valor pago em adiantamento (se existir)
@@ -67,14 +67,14 @@ parameters:
             example: analisando
         
         required:
-          - colaborador
-          - empresa
-          - num_prestacao
-          - data
-          - tipo_reembolso
-          - centro_custo
-          - moeda
-          - valor_faturado
+          - name
+          - company
+          - installment_number
+          - date
+          - expense_type
+          - cost_center
+          - currency
+          - value_billed
 
 responses:
   201:

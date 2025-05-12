@@ -21,7 +21,7 @@ def test_desempenho_requiscao_get(client):
     comeco = time.time() # Pegar a hora atual e transformar em segundos 100
     
     for _ in range(1000):
-        resposta = client.get('/colaborador/todos-colaboradores')
+        resposta = client.get('/colaborador/listar')
     
     fim = time.time() - comeco
     

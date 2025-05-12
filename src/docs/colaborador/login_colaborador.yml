@@ -13,9 +13,9 @@ parameters:
         email:
           type: string
           example: jojo@email.com
-        senha:
+        password:
           type: string
-          example: senha123
+          example: password123
 
 responses:
   200:

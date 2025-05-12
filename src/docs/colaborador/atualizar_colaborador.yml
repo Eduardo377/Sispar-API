@@ -17,19 +17,19 @@ parameters:
     schema:
       type: object
       properties:
-        nome:
+        name:
           type: string
           example: Joao da silva fredericksen almeida
         email:
           type: string
           example: jojo@email.com
-        senha:
+        passoword:
           type: string
-          example: senha123
-        cargo:
+          example: password123
+        position:
           type: string
           example: QA
-        salario: 
+        wage: 
           type: number
           example: 2500.78
 
