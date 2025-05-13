@@ -29,7 +29,7 @@ class Colaborador(db.Model):
             'password': self.password
         }
         
-    def all_date(self) -> dict:
+    def all_data(self) -> dict:
         return {
             'id': self.id,
             'name': self.name,

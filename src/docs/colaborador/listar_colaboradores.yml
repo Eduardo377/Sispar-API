@@ -2,6 +2,7 @@ tags:
   - Colaborador
 summary: Pegar todos os colaborador
 description: Retorna a lista de todos colaboradores
+
 responses:
   200:
     description: Requisição processada com sucesso

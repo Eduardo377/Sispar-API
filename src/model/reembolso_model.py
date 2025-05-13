@@ -19,7 +19,7 @@ class Reembolso(db.Model):
     div = Column(String(50))
     pep = Column(String(50))
     currency = Column(String(20), nullable=False)
-    distance_km = Column(String(50)) 
+    distance_km = Column(String(50))
     value_km = Column(String(50)) 
     value_billed = Column(DECIMAL(10,2), nullable=False) 
     expense = Column(DECIMAL(10,2))
