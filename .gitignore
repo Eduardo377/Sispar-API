@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,visualstudio,venv,dotenv,flask,python,datebase
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,visualstudio,venv,dotenv,flask,python,datebase
 
+config.py
+
 ### datebase ###
 *.accdb
 *.db
