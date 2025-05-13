@@ -27,18 +27,10 @@ def login():
         db.select(Colaborador).where(Colaborador.email == email)
     ).scalar() # -> A linha de informação OU None
     
-    print('*'*100)
-    print(f'dado: {colaborador} é do tipo {type(colaborador)}')
-    print('*'*100)
-    
     if not colaborador:
         return jsonify({'mensagem': 'Usuario não encontrado'}), 404
     
     colaborador = colaborador.to_dict()
-    
-    print('*'*100)
-    print(f'dado: {colaborador} é do tipo {type(colaborador)}')
-    print('*'*100)
     
     if email == colaborador.get('email') and checar_password(password, colaborador.get('password')):
         return jsonify({'mensagem': 'Login realizado com sucesso'}), 200
@@ -73,16 +65,17 @@ def cadastrar_novo_colaborador():
 # Endereco/colaborador/listar
 @bp_colaborador.route('/listar', methods=['GET'])
 @swag_from('../docs/colaborador/listar_colaboradores.yml')
-def pegar_dados_todos_colaboradores():
-    
-    colaboradores = db.session.execute(
+def visualizar_colaborador():
+    colaborador = db.session.scalars(
         db.select(Colaborador)
-    ).scalars().all()
+    ).all()
     
-#                       expressão                   item        iteravel
-    colaboradores = [ colaborador.all_data() for colaborador in colaboradores ]
+    if not colaborador:
+        return jsonify({'mensagem': 'Nenhum colaborador encontrado'}), 404
     
-    return jsonify(colaboradores), 200
+    name_colaborador = colaborador
+    
+    return jsonify([r.all_data() for r in name_colaborador]), 200
 
 # Endereco/colaborador/atualizar/1
 @bp_colaborador.route('/atualizar/<int:id_colaborador>', methods=['PUT'])
@@ -135,10 +128,30 @@ def deletar_colaborador(id_colaborador):
     except IntegrityError:
         db.session.rollback()
         return jsonify({
-            'erro': 'Este colaborador possui reembolsos pendentes e não pode ser deletado. '
-                    'É necessário tratar os reembolsos antes.'
+            'erro': 'Este colaborador possui colaboradors pendentes e não pode ser deletado. '
+                    'É necessário tratar os colaboradors antes.'
         }), 400
     
     except Exception as e:
         print(f"Erro: {e}")
         return jsonify({'erro': 'Erro ao deletar colaborador'}), 400
+    
+@bp_colaborador.route('/mockar', methods=['POST'])
+@swag_from('../docs/colaborador/mockar_colaboradores.yml')
+def popular_colaboradores():
+    # Lista de colaboradores mockados
+    mock_colaboradores = request.get_json()
+    if not mock_colaboradores:
+        return jsonify({"mensagem": "Nenhum colaborador mockado encontrado!"}), 400
+
+    for item in mock_colaboradores:
+        colaborador = Colaborador(
+            name=item["name"],
+            email=item["email"],
+            password=hash_password(item["password"]),
+            position=item["position"],
+            wage=item["wage"]
+        )
+        db.session.add(colaborador)
+    db.session.commit()
+    return jsonify({"mensagem": "✅ Colaboradores cadastrados com sucesso!"}),200
