@@ -26,9 +26,6 @@ parameters:
         installment_number:
           type: integer
           example: 1
-        description:
-          type: string
-          example: Comprovante de pizzaria
         date:
           type: string
           format: date
@@ -54,7 +51,7 @@ parameters:
         currency:
           type: string
           example: BRL
-        distance_km:
+        distance:
           type: string
           example: "100.10"
         value_km:

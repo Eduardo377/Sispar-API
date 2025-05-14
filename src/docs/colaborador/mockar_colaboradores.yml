@@ -1,0 +1,10 @@
+tags:
+  - Colaborador
+summary: Criar dados ficticios de colaboradores
+description: Irá popular a base de dados com colaboradores fictícios.
+
+responses:
+  200:
+    description: Requisição processada com sucesso
+  500:
+    description: Erro inesperado ao processar a requisição

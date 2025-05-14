@@ -21,7 +21,6 @@ def solicitar_reembolso():
             name=dados['name'],
             company=dados['company'],
             installment_number=dados['installment_number'],
-            description=dados.get('description', ''),
             date=dados.get('date'),
             expense_type=dados['expense_type'],
             cost_center=dados['cost_center'],
@@ -29,7 +28,7 @@ def solicitar_reembolso():
             div=dados.get('div'),
             pep=dados.get('pep'),
             currency=dados['currency'],
-            distance_km=dados.get('distance_km'),
+            distance=dados.get('distance'),
             value_km=dados.get('value_km'),
             value_billed=dados['value_billed'],
             expense=dados.get('expense', 0),
@@ -70,8 +69,6 @@ def atualizar_dados_do_reembolso(id_reembolso):
             reembolso.name = dados_reembolso['name']
         if 'company' in dados_reembolso:
             reembolso.company = dados_reembolso['company']
-        if 'description' in dados_reembolso:
-            reembolso.description = dados_reembolso['description']
         if 'date' in dados_reembolso:
             reembolso.date = dados_reembolso['date']
         if 'expense_type' in dados_reembolso:
@@ -86,8 +83,8 @@ def atualizar_dados_do_reembolso(id_reembolso):
             reembolso.pep = dados_reembolso['pep']
         if 'currency' in dados_reembolso:
             reembolso.currency = dados_reembolso['currency']
-        if 'distance_km' in dados_reembolso:
-            reembolso.distance_km = dados_reembolso['distance_km']
+        if 'distance' in dados_reembolso:
+            reembolso.distance = dados_reembolso['distance']
         if 'value_km' in dados_reembolso:
             reembolso.value_km = dados_reembolso['value_km']
         if 'value_billed' in dados_reembolso:
@@ -120,3 +117,191 @@ def deletar_reembolso(id_reembolso):
     except Exception as e:
         print(f"Erro: {e}")
         return jsonify({'erro': 'Erro ao deletar reembolso'}), 400
+    
+
+                
+@bp_reembolsos.route('/mockar', methods=['POST'])
+@swag_from('../docs/reembolso/mockar_reembolso.yml')
+def popular_rembolsos():
+    # mock_reembolso = request.get_json()  # Pega o conteúdo da requisição
+    
+    mock = [
+                        {
+                            "name": "Marina Gomes de Almeida",
+                            "company": "WSS002",
+                            "installment_number": 328451,
+                            "date": "2025-02-12",
+                            "expense_type": "Desp. de viagem comercial",
+                            "cost_center": "1100110003 - DIR COMERCIAL SP",
+                            "internal_order": "0012",
+                            "div": "003",
+                            "pep": "003",
+                            "currency": "BRL",
+                            "distance": "232Km",
+                            "value_km": "0.68",
+                            "value_billed": 157.76,
+                            "expense": 35.40,
+                            "id_colaborador": 2
+                        },
+                        {
+                            "name": "Carlos Eduardo Ferreira",
+                            "company": "WSS003",
+                            "installment_number": 328452,
+                            "date": "2025-03-08",
+                            "expense_type": "Desp. de viagem administrativa",
+                            "cost_center": "1100110005 - SUPRIMENTOS RJ",
+                            "internal_order": "0010",
+                            "div": "001",
+                            "pep": "002",
+                            "currency": "BRL",
+                            "distance": "150Km",
+                            "value_km": "0.65",
+                            "value_billed": 97.50,
+                            "expense": 22.00,
+                            "id_colaborador": 3
+                        },
+                        {
+                            "name": "Juliana Alves Martins",
+                            "company": "WSS004",
+                            "installment_number": 328453,
+                            "date": "2025-01-19",
+                            "expense_type": "Desp. de viagem técnica",
+                            "cost_center": "1100110010 - ENGENHARIA PROJETOS MTZ",
+                            "internal_order": "0008",
+                            "div": "002",
+                            "pep": "004",
+                            "currency": "BRL",
+                            "distance": "350Km",
+                            "value_km": "0.67",
+                            "value_billed": 234.50,
+                            "expense": 48.30,
+                            "id_colaborador": 4
+                        },
+                        {
+                            "name": "André Souza Lima",
+                            "company": "WSS005",
+                            "installment_number": 328454,
+                            "date": "2025-04-05",
+                            "expense_type": "Desp. de visita técnica",
+                            "cost_center": "1100110006 - OPERACOES NORDESTE",
+                            "internal_order": "0006",
+                            "div": "004",
+                            "pep": "001",
+                            "currency": "BRL",
+                            "distance": "415Km",
+                            "value_km": "0.65",
+                            "value_billed": 269.75,
+                            "expense": 38.15,
+                            "id_colaborador": 5
+                        },
+                        {
+                            "name": "Fernanda Carvalho Ribeiro",
+                            "company": "WSS006",
+                            "installment_number": 328455,
+                            "date": "2025-01-27",
+                            "expense_type": "Desp. de inspeção",
+                            "cost_center": "1100110007 - QUALIDADE E SEGURANÇA",
+                            "internal_order": "0015",
+                            "div": "002",
+                            "pep": "002",
+                            "currency": "BRL",
+                            "distance": "278Km",
+                            "value_km": "0.66",
+                            "value_billed": 183.48,
+                            "expense": 33.80,
+                            "id_colaborador": 6
+                        },
+                        {
+                            "name": "Renato Lima Oliveira",
+                            "company": "WSS007",
+                            "installment_number": 328456,
+                            "date": "2025-02-03",
+                            "expense_type": "Desp. de suporte técnico",
+                            "cost_center": "1100110011 - TI SUPORTE RJ",
+                            "internal_order": "0009",
+                            "div": "001",
+                            "pep": "003",
+                            "currency": "BRL",
+                            "distance": "196Km",
+                            "value_km": "0.70",
+                            "value_billed": 137.20,
+                            "expense": 27.50,
+                            "id_colaborador": 7
+                        },
+                        {
+                            "name": "Tatiane Barros da Luz",
+                            "company": "WSS008",
+                            "installment_number": 328457,
+                            "date": "2025-03-11",
+                            "expense_type": "Desp. de viagem administrativa",
+                            "cost_center": "1100110009 - ADMINISTRAÇÃO CENTRAL",
+                            "internal_order": "0014",
+                            "div": "005",
+                            "pep": "001",
+                            "currency": "BRL",
+                            "distance": "320Km",
+                            "value_km": "0.69",
+                            "value_billed": 220.80,
+                            "expense": 36.90,
+                            "id_colaborador": 8
+                        },
+                        {
+                            "name": "Roberto Silva Costa",
+                            "company": "WSS009",
+                            "installment_number": 328458,
+                            "date": "2025-01-23",
+                            "expense_type": "Desp. de operação técnica",
+                            "cost_center": "1100110012 - MANUTENÇÃO RJ",
+                            "internal_order": "0011",
+                            "div": "003",
+                            "pep": "004",
+                            "currency": "BRL",
+                            "distance": "390Km",
+                            "value_km": "0.68",
+                            "value_billed": 265.20,
+                            "expense": 42.35,
+                            "id_colaborador": 9
+                        },
+                        {
+                            "name": "Priscila Dias Nogueira",
+                            "company": "WSS010",
+                            "installment_number": 328459,
+                            "date": "2025-04-01",
+                            "expense_type": "Desp. de supervisão",
+                            "cost_center": "1100110013 - SUPERVISÃO SUL",
+                            "internal_order": "0007",
+                            "div": "002",
+                            "pep": "003",
+                            "currency": "BRL",
+                            "distance": "410Km",
+                            "value_km": "0.65",
+                            "value_billed": 266.50,
+                            "expense": 45.90,
+                            "id_colaborador": 10
+                        }
+                    ]
+    mock_reembolso = mock # Verifica se o corpo da requisição está vazio, se sim, usa a lista mockada
+    # Lista de colaboradores mockados
+    if not mock_reembolso:
+        return jsonify({"mensagem": "Nenhum reembolso mockado encontrado!"}), 400
+    for item in mock_reembolso:
+        reembolso = Reembolso(
+            name=item["name"],
+            company=item["company"],
+            installment_number=item["installment_number"],
+            date=item["date"],
+            expense_type=item["expense_type"],
+            cost_center=item["cost_center"],
+            internal_order=item["internal_order"],
+            div=item["div"],
+            pep=item["pep"],
+            currency=item["currency"],
+            distance=item["distance"],
+            value_km=item["value_km"],
+            value_billed=item["value_billed"],
+            expense=item["expense"],
+            id_colaborador=item["id_colaborador"]
+        )
+        db.session.add(reembolso)
+    db.session.commit()
+    return jsonify({"mensagem": "✅ Reembolsos cadastrados com sucesso!"}), 200

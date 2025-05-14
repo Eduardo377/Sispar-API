@@ -140,7 +140,78 @@ def deletar_colaborador(id_colaborador):
 @swag_from('../docs/colaborador/mockar_colaboradores.yml')
 def popular_colaboradores():
     # Lista de colaboradores mockados
-    mock_colaboradores = request.get_json()
+    mock_colaboradores = [
+                            {
+                                "name": "Vitor Carvalho de Souza",
+                                "email": "vitor@gmail.com",
+                                "password": "vitor123",
+                                "position": "Desenvolvedor Front-end",
+                                "wage": 11000.78
+                            },
+                            {
+                                "name": "Juliana Martins Lopes",
+                                "email": "juliana.lopes@example.com",
+                                "password": "juliana456",
+                                "position": "Desenvolvedora Back-end",
+                                "wage": 9700.50
+                            },
+                            {
+                                "name": "Carlos Eduardo Almeida",
+                                "email": "carlos.almeida@example.com",
+                                "password": "carlao789",
+                                "position": "Desenvolvedor Full Stack",
+                                "wage": 12500.00
+                            },
+                            {
+                                "name": "Mariana Rocha Ferreira",
+                                "email": "mariana.rf@example.com",
+                                "password": "mari2024",
+                                "position": "Desenvolvedora Front-end",
+                                "wage": 10450.30
+                            },
+                            {
+                                "name": "Lucas da Silva Ramos",
+                                "email": "lucas.ramos@example.com",
+                                "password": "lucas321",
+                                "position": "Desenvolvedor Back-end",
+                                "wage": 9800.10
+                            },
+                            {
+                                "name": "Aline Costa Moreira",
+                                "email": "aline.moreira@example.com",
+                                "password": "aline159",
+                                "position": "Desenvolvedora WordPress",
+                                "wage": 7900.00
+                            },
+                            {
+                                "name": "Bruno Henrique Souza",
+                                "email": "bruno.souza@example.com",
+                                "password": "bruno999",
+                                "position": "Desenvolvedor Front-end",
+                                "wage": 11200.75
+                            },
+                            {
+                                "name": "Fernanda Oliveira Lima",
+                                "email": "fernanda.lima@example.com",
+                                "password": "f3rnand@",
+                                "position": "Desenvolvedora Full Stack",
+                                "wage": 13000.60
+                            },
+                            {
+                                "name": "Tiago Mendes Pereira",
+                                "email": "tiago.pereira@example.com",
+                                "password": "tiagomp2025",
+                                "position": "Desenvolvedor Front-end",
+                                "wage": 10120.00
+                            },
+                            {
+                                "name": "Paula Regina Nascimento",
+                                "email": "paula.nascimento@example.com",
+                                "password": "paula2025",
+                                "position": "Desenvolvedora Back-end",
+                                "wage": 9400.85
+                            }
+                        ]
     if not mock_colaboradores:
         return jsonify({"mensagem": "Nenhum colaborador mockado encontrado!"}), 400
 

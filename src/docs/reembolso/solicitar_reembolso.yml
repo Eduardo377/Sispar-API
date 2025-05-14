@@ -19,9 +19,6 @@ parameters:
           installment_number:
             type: number
             example: 1
-          description:
-            type: string
-            example: Comprovante de abastecimento em posto de gasolina
           date:
             type: date
             example: 2025/05/05
@@ -46,7 +43,7 @@ parameters:
           currency:
             type: string
             example: BRL
-          distance_km:
+          distance:
             type: string
             example: "100.10"
           value_km:
