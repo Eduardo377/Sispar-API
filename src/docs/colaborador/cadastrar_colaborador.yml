@@ -16,7 +16,7 @@ parameters:
         email:
           type: string
           example: zeze@email.com
-        passoword:
+        password:
           type: string
           example: password123
         position:
