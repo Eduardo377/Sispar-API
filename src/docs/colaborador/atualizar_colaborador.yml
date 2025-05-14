@@ -23,7 +23,7 @@ parameters:
         email:
           type: string
           example: jojo@email.com
-        passoword:
+        password:
           type: string
           example: password123
         position:
