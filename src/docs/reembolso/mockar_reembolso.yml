@@ -1,0 +1,10 @@
+tags:
+  - Reembolso
+summary: Criar dados ficticios de reembolsos ligados a colaboradores.
+description: Irá popular a base de dados com reembolsos de colaboradores fictícios.
+
+responses:
+  200:
+    description: Requisição processada com sucesso
+  500:
+    description: Erro inesperado ao processar a requisição
