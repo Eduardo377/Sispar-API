@@ -67,32 +67,60 @@ def atualizar_dados_do_reembolso(id_reembolso):
             return jsonify({'erro': 'Reembolso não encontrado'}), 404
         if 'name' in dados_reembolso:
             reembolso.name = dados_reembolso['name']
+        elif 'name' not in dados_reembolso:
+            reembolso.name =reembolso.name
         if 'company' in dados_reembolso:
             reembolso.company = dados_reembolso['company']
+        elif 'company' not in dados_requisicao:
+            reembolso.company = reembolso.company
         if 'date' in dados_reembolso:
             reembolso.date = dados_reembolso['date']
+        elif 'date' not in dados_reembolso:
+            reembolso.date = reembolso.date
         if 'expense_type' in dados_reembolso:
             reembolso.expense_type = dados_reembolso['expense_type']
+        elif 'expense_type' not in dados_reembolso:
+            reembolso.expense_type = reembolso.expense_type
         if 'cost_center' in dados_reembolso:
             reembolso.cost_center = dados_reembolso['cost_center']
+        elif 'cost_center' not in dados_reembolso:
+            reembolso.cost_center = reembolso.cost_center
         if 'internal_order' in dados_reembolso:
             reembolso.internal_order = dados_reembolso['internal_order']
+        elif 'internal_order' not in dados_reembolso:
+            reembolso.internal_order = reembolso.internal_order
         if 'div' in dados_reembolso:
             reembolso.div = dados_reembolso['div']
+        elif 'div' not in dados_reembolso:
+            reembolso.div = reembolso.div
         if 'pep' in dados_reembolso:
             reembolso.pep = dados_reembolso['pep']
+        elif 'pep' not in dados_reembolso:
+            reembolso.pep = reembolso.pep
         if 'currency' in dados_reembolso:
             reembolso.currency = dados_reembolso['currency']
+        elif 'currency' not in dados_reembolso:
+            reembolso.currency = reembolso.currency
         if 'distance' in dados_reembolso:
             reembolso.distance = dados_reembolso['distance']
+        elif 'distance' not in dados_reembolso:
+            reembolso.distance = reembolso.distance
         if 'value_km' in dados_reembolso:
             reembolso.value_km = dados_reembolso['value_km']
+        elif 'value_km' not in dados_reembolso:
+            reembolso.value_km = reembolso.value_km
         if 'value_billed' in dados_reembolso:
             reembolso.value_billed = dados_reembolso['value_billed']
+        elif 'value_billed' not in dados_reembolso:
+            reembolso.value_billed = reembolso.value_billed
         if 'expense' in dados_reembolso:
             reembolso.expense = dados_reembolso['expense']
+        elif 'expense' not in dados_reembolso:
+            reembolso.expense = reembolso.expense
         if 'status' in dados_reembolso:
-            reembolso.status = dados_reembolso['status'] 
+            reembolso.status = dados_reembolso['status']
+        elif 'status' not in dados_reembolso:
+            reembolso.status = reembolso.status
                 
         db.session.commit()
         return jsonify({'mensagem': 'Dados do reembolso atualizados com sucesso'}), 200
@@ -117,8 +145,6 @@ def deletar_reembolso(id_reembolso):
     except Exception as e:
         print(f"Erro: {e}")
         return jsonify({'erro': 'Erro ao deletar reembolso'}), 400
-    
-
                 
 @bp_reembolsos.route('/mockar', methods=['POST'])
 @swag_from('../docs/reembolso/mockar_reembolso.yml')

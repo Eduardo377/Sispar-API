@@ -33,7 +33,10 @@ def login():
     colaborador = colaborador.to_dict()
     
     if email == colaborador.get('email') and checar_password(password, colaborador.get('password')):
-        return jsonify({'mensagem': 'Login realizado com sucesso'}), 200
+        return jsonify({
+                'mensagem': 'Login realizado com sucesso',
+                'id_login': colaborador.get('id')
+            }), 200
     else:
         return jsonify({'mensagem': 'Credenciais invalidas'}), 400
     
@@ -43,6 +46,9 @@ def login():
 def cadastrar_novo_colaborador(): 
     
     dados_requisicao = request.get_json()
+    
+    if not dados_requisicao:
+        return jsonify({'erro': 'Todos os dados precisam ser preenchidos'}), 400
     
     try:
         password_criptografada = hash_password(dados_requisicao['password'])
@@ -89,18 +95,30 @@ def atualizar_dados_do_colaborador(id_colaborador):
 
         if not colaborador:
             return jsonify({'erro': 'Colaborador não encontrado'}), 404
+        if checar_password(dados_requisicao['password'], colaborador.password):
+            return jsonify({'erro': 'A nova senha não pode ser a mesma a atual senha'}), 400
         
         if 'name' in dados_requisicao:
             colaborador.name = dados_requisicao['name']
+        elif 'name' not in dados_requisicao:
+            colaborador.name = colaborador.name
         if 'email' in dados_requisicao:
             colaborador.email = dados_requisicao['email']
+        elif 'email' not in dados_requisicao:
+            colaborador.email = colaborador.email
         if 'password' in dados_requisicao:
             password_criptografada = hash_password(dados_requisicao['password'])
             colaborador.password = password_criptografada
+        elif 'password' not in dados_requisicao:
+            colaborador.password = colaborador.password
         if 'position' in dados_requisicao:
             colaborador.position = dados_requisicao['position']
+        elif 'position' not in dados_requisicao:
+            colaborador.position = colaborador.position
         if 'wage' in dados_requisicao:
             colaborador.wage = dados_requisicao['wage']
+        elif 'wage' not in dados_requisicao:
+            colaborador.wage = colaborador.wage
             
         db.session.add(colaborador)
         db.session.commit()
